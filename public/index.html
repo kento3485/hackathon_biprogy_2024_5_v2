@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIFF App</title>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+        function initializeLiff() {
+            fetch('/liff-id')
+                .then(response => response.json())
+                .then(data => {
+                    liff.init({ liffId: data.liffId })
+                        .then(() => {
+                            document.getElementById('liffAppContent').style.display = 'block';
+                        })
+                        .catch(err => {
+                            console.error('LIFF initialization failed ', err);
+                        });
+                });
+        }
+        document.addEventListener('DOMContentLoaded', initializeLiff);
+    </script>
+</head>
+<body>
+    <div id="liffAppContent" style="display:none;">
+        <h1>Welcome to LIFF App</h1>
+        <p>Your LIFF App is running!</p>
+    </div>
+</body>
+</html>
