@@ -1,12 +1,25 @@
 // src/components/UserProfile.js
-import React from 'react';
-import { Container, Typography, Avatar, List, ListItem, ListItemText, Box, Button, Paper, Card, CardContent } from '@mui/material';
-import { users } from '../data/dummyData';
+import React, { useEffect, useState } from 'react';
+import { Container, Typography, Avatar, List, ListItem, ListItemText, Box, Button, Card, CardContent } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { initializeLiff, getProfile } from '../liff';
 
 const UserProfile = () => {
-  const user = users[0]; // ダミーユーザーデータの取得
+  const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      await initializeLiff();
+      const userProfile = await getProfile();
+      setProfile(userProfile);
+    };
+    fetchProfile();
+  }, []);
+
+  if (!profile) {
+    return <Typography variant="h5">Loading...</Typography>;
+  }
 
   return (
     <Container>
@@ -14,20 +27,14 @@ const UserProfile = () => {
         <CardContent>
           <Typography variant="h2" gutterBottom>ユーザープロフィール</Typography>
           <Box display="flex" justifyContent="center" mb={2}>
-            <Avatar alt={user.name} src={user.icon} sx={{ width: 100, height: 100 }} />
+            <Avatar alt={profile.displayName} src={profile.pictureUrl} sx={{ width: 100, height: 100 }} />
           </Box>
           <List>
             <ListItem>
-              <ListItemText primary={`名前: ${user.name}`} />
+              <ListItemText primary={`名前: ${profile.displayName}`} />
             </ListItem>
             <ListItem>
-              <ListItemText primary={`電話番号: ${user.call_num}`} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary={`住所: ${user.address}`} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary={`メールアドレス: ${user.mail_address}`} />
+              <ListItemText primary={`ステータスメッセージ: ${profile.statusMessage}`} />
             </ListItem>
           </List>
         </CardContent>
