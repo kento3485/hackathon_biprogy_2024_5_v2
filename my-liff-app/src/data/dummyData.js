@@ -21,6 +21,15 @@ export const users = [
       cost: "500円",
       rental_id: 1,
     },
+    {
+      id: 2,
+      type: "自転車",
+      comment: "レンタル物詳細説明文",
+      start_date: "2024-05-21",
+      end_date: "2024-05-22",
+      cost: "200円",
+      rental_id: 2,
+    },
     // 他のレンタルデータ...
   ];
   
