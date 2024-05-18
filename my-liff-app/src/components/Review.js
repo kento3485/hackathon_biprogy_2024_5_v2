@@ -1,19 +1,20 @@
 // src/components/Review.js
 import React from 'react';
+import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 import { evaluations } from '../data/dummyData';
 
 const Review = () => {
   return (
-    <div>
-      <h2>評価</h2>
-      <ul>
+    <Container>
+      <Typography variant="h2" gutterBottom>評価</Typography>
+      <List>
         {evaluations.map((evaluation, index) => (
-          <li key={index}>
-            評価値: {evaluation.evaluation}
-          </li>
+          <ListItem key={index}>
+            <ListItemText primary={`評価値: ${evaluation.evaluation}`} />
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Container>
   );
 };
 

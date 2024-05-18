@@ -1,19 +1,20 @@
 // src/components/ApplicationStatus.js
-import React from "react";
-import { applications } from "../data/dummyData";
+import React from 'react';
+import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { applications } from '../data/dummyData';
 
 const ApplicationStatus = () => {
   return (
-    <div>
-      <h2>現在のレンタル状況</h2>
-      <ul>
-        {applications.map((app) => (
-          <li key={app.rental_id}>
-            レンタルID: {app.rental_id}, 状態: {app.status}, 開始日: {app.start_date}
-          </li>
+    <Container>
+      <Typography variant="h2" gutterBottom>現在のレンタル状況</Typography>
+      <List>
+        {applications.map((app, index) => (
+          <ListItem key={index}>
+            <ListItemText primary={`レンタルID: ${app.rental_id}, 状態: ${app.status}, 開始日: ${app.start_date}`} />
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Container>
   );
 };
 
