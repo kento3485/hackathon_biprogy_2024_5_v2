@@ -1,6 +1,6 @@
 // src/components/RecruitmentList.js
 import React from 'react';
-import { Container, Typography, List, ListItem, ListItemText, Box, BottomNavigation, BottomNavigationAction } from '@mui/material';
+import { Container, Typography, List, ListItem, ListItemText, Box, BottomNavigation, BottomNavigationAction, Button } from '@mui/material';
 import { rentals } from '../data/dummyData';
 import { Link, useNavigate } from 'react-router-dom';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -17,11 +17,12 @@ const RecruitmentList = () => {
       <Typography variant="h2" gutterBottom>募集一覧</Typography>
       <List>
         {rentals.map((rental) => (
-          <ListItem key={rental.id} component={Link} to={`/rental-details/${rental.id}`} button>
+          <ListItem key={rental.id} divider>
             <ListItemText
               primary={`種類: ${rental.type}`}
               secondary={`コメント: ${rental.comment} | 費用: ${rental.cost} | 期間: ${rental.start_date} - ${rental.end_date}`}
             />
+            <Button variant="contained" color="primary" onClick={() => navigate(`/application-complete/${rental.id}`)}>応募</Button>
           </ListItem>
         ))}
       </List>

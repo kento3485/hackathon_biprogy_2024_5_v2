@@ -1,12 +1,13 @@
 // src/components/ApplicationComplete.js
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Typography, Box, Button, Avatar, List, ListItem, ListItemText } from '@mui/material';
 import { applications, users, evaluations } from '../data/dummyData';
 
-const ApplicationComplete = ({ match }) => {
+const ApplicationComplete = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const applicationId = parseInt(match.params.id);
+  const applicationId = parseInt(id);
   const application = applications.find(app => app.rental_id === applicationId);
   const user = users.find(u => u.id === application.applicant_id);
   const evaluation = evaluations.find(e => e.employee_id === application.applicant_id);
