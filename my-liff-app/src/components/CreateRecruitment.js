@@ -1,6 +1,6 @@
 // src/components/CreateRecruitment.js
 import React, { useState } from 'react';
-import { Container, Typography, TextField, Button, Box, Paper } from '@mui/material';
+import { Container, Typography, TextField, Button, Box, Paper, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const CreateRecruitment = () => {
@@ -20,34 +20,40 @@ const CreateRecruitment = () => {
       <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
         <Typography variant="h2" gutterBottom>募集作成</Typography>
         <Box component="form" noValidate autoComplete="off">
-          <TextField
-            label="種類"
-            fullWidth
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            margin="normal"
-          />
-          <TextField
-            label="コメント"
-            fullWidth
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            margin="normal"
-          />
-          <TextField
-            label="費用"
-            fullWidth
-            value={cost}
-            onChange={(e) => setCost(e.target.value)}
-            margin="normal"
-          />
-          <TextField
-            label="期間"
-            fullWidth
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
-            margin="normal"
-          />
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label="種類"
+                fullWidth
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="コメント"
+                fullWidth
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="費用"
+                fullWidth
+                value={cost}
+                onChange={(e) => setCost(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="期間"
+                fullWidth
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+              />
+            </Grid>
+          </Grid>
           <Box display="flex" justifyContent="center" mt={2}>
             <Button variant="contained" color="primary" onClick={handleCreate} sx={{ marginRight: 2 }}>募集作成</Button>
             <Button variant="contained" color="primary" onClick={() => navigate('/recruitment-list')}>戻る</Button>

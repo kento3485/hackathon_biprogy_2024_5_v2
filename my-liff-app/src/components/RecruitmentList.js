@@ -1,13 +1,12 @@
 // src/components/RecruitmentList.js
 import React from 'react';
-import { Container, Typography, List, ListItem, ListItemText, Box, BottomNavigation, BottomNavigationAction, Button } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, CardActions, Button, Box } from '@mui/material';
 import { rentals } from '../data/dummyData';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import GradeIcon from '@mui/icons-material/Grade';
 
 const RecruitmentList = () => {
   const navigate = useNavigate();
@@ -15,30 +14,75 @@ const RecruitmentList = () => {
   return (
     <Container>
       <Typography variant="h2" gutterBottom>募集一覧</Typography>
-      <List>
+      <Grid container spacing={3}>
         {rentals.map((rental) => (
-          <ListItem key={rental.id} divider>
-            <ListItemText
-              primary={`種類: ${rental.type}`}
-              secondary={`コメント: ${rental.comment} | 費用: ${rental.cost} | 期間: ${rental.start_date} - ${rental.end_date}`}
-            />
-            <Button variant="contained" color="primary" onClick={() => navigate(`/application-complete/${rental.id}`)}>応募</Button>
-          </ListItem>
+          <Grid item xs={12} sm={6} md={4} key={rental.id}>
+            <Card elevation={3}>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  種類: {rental.type}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  コメント: {rental.comment}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  期間: {rental.start_date} - {rental.end_date}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  費用: {rental.cost}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" onClick={() => navigate(`/rental-details/${rental.id}`)}>詳細</Button>
+                <Button size="small" color="primary" variant="contained" onClick={() => navigate(`/application-complete/${rental.id}`)}>応募</Button>
+              </CardActions>
+            </Card>
+          </Grid>
         ))}
-      </List>
-      <Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
-        <BottomNavigation
-          showLabels
-          onChange={(event, newValue) => {
-            navigate(newValue);
-          }}
-        >
-          <BottomNavigationAction label="募集作成" value="/create-recruitment" icon={<AddCircleIcon />} />
-          <BottomNavigationAction label="レンタル状況" value="/application-status" icon={<ListAltIcon />} />
-          <BottomNavigationAction label="検索設定" value="/search-settings" icon={<SearchIcon />} />
-          <BottomNavigationAction label="プロフィール" value="/user-profile" icon={<AccountCircleIcon />} />
-          <BottomNavigationAction label="評価" value="/review" icon={<GradeIcon />} />
-        </BottomNavigation>
+      </Grid>
+      <Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, bgcolor: 'background.paper', py: 2 }}>
+        <Grid container spacing={2} justifyContent="center">
+          <Grid item>
+            <Button
+              startIcon={<AddCircleIcon />}
+              variant="contained"
+              color="primary"
+              onClick={() => navigate('/create-recruitment')}
+            >
+              募集作成
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              startIcon={<ListAltIcon />}
+              variant="contained"
+              color="primary"
+              onClick={() => navigate('/application-status')}
+            >
+              レンタル状況
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              startIcon={<SearchIcon />}
+              variant="contained"
+              color="primary"
+              onClick={() => navigate('/search-settings')}
+            >
+              検索設定
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              startIcon={<AccountCircleIcon />}
+              variant="contained"
+              color="primary"
+              onClick={() => navigate('/user-profile')}
+            >
+              プロフィール
+            </Button>
+          </Grid>
+        </Grid>
       </Box>
     </Container>
   );
