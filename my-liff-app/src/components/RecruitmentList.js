@@ -12,17 +12,17 @@ const RecruitmentList = () => {
   const navigate = useNavigate();
 
   return (
-    <Container>
+    <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Typography variant="h2" gutterBottom>募集一覧</Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         {rentals.map((rental) => (
           <Grid item xs={12} sm={6} md={4} key={rental.id}>
-            <Card elevation={3}>
+            <Card elevation={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
               <CardContent>
-                <Typography variant="h5" component="div">
+                <Typography variant="h5" component="div" gutterBottom>
                   種類: {rental.type}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" paragraph>
                   コメント: {rental.comment}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -33,14 +33,14 @@ const RecruitmentList = () => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" onClick={() => navigate(`/rental-details/${rental.id}`)}>詳細</Button>
-                <Button size="small" color="primary" variant="contained" onClick={() => navigate(`/application-complete/${rental.id}`)}>応募</Button>
+                <Button size="small" color="primary" onClick={() => navigate(`/rental-details/${rental.id}`)}>詳細</Button>
+                <Button size="small" variant="contained" color="primary" onClick={() => navigate(`/application-complete/${rental.id}`)}>応募</Button>
               </CardActions>
             </Card>
           </Grid>
         ))}
       </Grid>
-      <Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, bgcolor: 'background.paper', py: 2 }}>
+      <Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, bgcolor: 'background.paper', py: 2, boxShadow: 3 }}>
         <Grid container spacing={2} justifyContent="center">
           <Grid item>
             <Button
