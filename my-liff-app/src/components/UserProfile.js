@@ -1,10 +1,12 @@
 // src/components/UserProfile.js
 import React from 'react';
-import { Container, Typography, Avatar, List, ListItem, ListItemText } from '@mui/material';
+import { Container, Typography, Avatar, List, ListItem, ListItemText, Box, Button } from '@mui/material';
 import { users } from '../data/dummyData';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
   const user = users[0]; // ダミーユーザーデータの取得
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -24,6 +26,9 @@ const UserProfile = () => {
           <ListItemText primary={`メールアドレス: ${user.mail_address}`} />
         </ListItem>
       </List>
+      <Box display="flex" justifyContent="flex-end" position="fixed" bottom={0} left={0} right={0} p={2} bgcolor="background.paper">
+        <Button variant="contained" color="primary" onClick={() => navigate('/recruitment-list')}>戻る</Button>
+      </Box>
     </Container>
   );
 };

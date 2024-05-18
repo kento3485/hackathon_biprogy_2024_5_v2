@@ -1,12 +1,14 @@
 // src/components/CreateRecruitment.js
 import React, { useState } from 'react';
 import { Container, Typography, TextField, Button, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const CreateRecruitment = () => {
   const [type, setType] = useState('');
   const [comment, setComment] = useState('');
   const [cost, setCost] = useState('');
   const [duration, setDuration] = useState('');
+  const navigate = useNavigate();
 
   const handleCreate = () => {
     // ダミーデータに新しい募集を追加する処理
@@ -45,9 +47,10 @@ const CreateRecruitment = () => {
           onChange={(e) => setDuration(e.target.value)}
           margin="normal"
         />
-        <Button variant="contained" color="primary" onClick={handleCreate}>
-          募集作成
-        </Button>
+        <Button variant="contained" color="primary" onClick={handleCreate} sx={{ marginBottom: 2 }}>募集作成</Button>
+      </Box>
+      <Box display="flex" justifyContent="flex-end" position="fixed" bottom={0} left={0} right={0} p={2} bgcolor="background.paper">
+        <Button variant="contained" color="primary" onClick={() => navigate('/recruitment-list')}>戻る</Button>
       </Box>
     </Container>
   );

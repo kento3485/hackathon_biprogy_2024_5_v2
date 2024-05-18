@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import { Container, Typography, List, ListItem, ListItemText, Button, Box } from '@mui/material';
 import { applications } from '../data/dummyData';
+import { useNavigate } from 'react-router-dom';
 
 const ApplicationStatus = () => {
   const [appData, setAppData] = useState(applications);
+  const navigate = useNavigate();
 
   const handleDelete = (rentalId) => {
     setAppData(appData.filter(app => app.rental_id !== rentalId));
@@ -34,6 +36,9 @@ const ApplicationStatus = () => {
           </ListItem>
         ))}
       </List>
+      <Box display="flex" justifyContent="flex-end" position="fixed" bottom={0} left={0} right={0} p={2} bgcolor="background.paper">
+        <Button variant="contained" color="primary" onClick={() => navigate('/recruitment-list')}>戻る</Button>
+      </Box>
     </Container>
   );
 };
