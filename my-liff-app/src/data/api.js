@@ -109,3 +109,28 @@ export const getApplication = async () => {
 //     setTimeout(() => resolve(applications), 1000);
 //   });
 // };
+
+export const createRecruitment = async (data) => {
+  console.log('Sending data to the server...', data);
+  
+  try {
+    const response = await fetch('https://hook.eu2.make.com/g14c99e6l1msn6wk0axl5uszxcuiigdb', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const result = await response.json();
+    console.log('Data successfully sent to the server', result);
+    return result;
+  } catch (error) {
+    console.error('Failed to send data to the server', error);
+    throw error;
+  }
+};
