@@ -24,22 +24,9 @@ const CreateRecruitment = () => {
   const [duration, setDuration] = useState("");
   const navigate = useNavigate();
 
-  const handleCreate = async () => {
-    const data = {
-      type,
-      comment,
-      cost,
-      start_date: startDate,
-      end_date: endDate,
-    };
-
-    try {
-      await createRecruitment(data);
-      console.log('募集作成成功:', data);
-      navigate('/recruitment-list');
-    } catch (error) {
-      console.error('募集作成失敗:', error);
-    }
+  const handleCreate = () => {
+    // ダミーデータに新しい募集を追加する処理
+    console.log("募集作成", { type, comment, cost, duration });
   };
 
   return (

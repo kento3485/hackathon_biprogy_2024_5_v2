@@ -1,33 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Grid, Card, CardContent, CardActions, Button, Box, AppBar, Toolbar } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, CardActions, Button, Box, AppBar, Toolbar, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { getRental, applyForRental } from '../data/api';
+import { getRental } from '../data/api';
 
 const RecruitmentList = () => {
   const navigate = useNavigate();
   const [rentals, setRentals] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRentals = async () => {
-      const rentalData = await getRental();
-      setRentals(rentalData);
+      try {
+        const rentalData = await getRental();
+        setRentals(rentalData);
+      } catch (error) {
+        console.error("Failed to fetch rentals", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchRentals();
   }, []);
 
-  const handleApply = async (rentalId) => {
-    try {
-      await applyForRental(rentalId);
-      console.log('応募成功:', rentalId);
-    } catch (error) {
-      console.error('応募失敗:', error);
-    }
-  };
+  if (loading) {
+    return (
+      <Container>
+        <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+          <CircularProgress />
+        </Box>
+      </Container>
+    );
+  }
 
   return (
     <>
@@ -59,7 +67,7 @@ const RecruitmentList = () => {
                 </CardContent>
                 <CardActions>
                   <Button size="small" color="primary" onClick={() => navigate(`/rental-details/${rental.id}`)}>詳細</Button>
-                  <Button size="small" variant="contained" color="primary" onClick={() => handleApply(rental.id)}>応募</Button>
+                  <Button size="small" variant="contained" color="primary" onClick={() => navigate(`/application-complete/${rental.id}`)}>応募</Button>
                 </CardActions>
               </Card>
             </Grid>
