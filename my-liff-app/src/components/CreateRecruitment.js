@@ -16,12 +16,15 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
+import { createRecruitment } from "../data/api";
 
 const CreateRecruitment = () => {
   const [type, setType] = useState("");
   const [comment, setComment] = useState("");
   const [cost, setCost] = useState("");
   const [duration, setDuration] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const navigate = useNavigate();
 
   const handleCreate = async () => {
@@ -114,20 +117,30 @@ const CreateRecruitment = () => {
               <Grid item xs={12}>
                 <p>貸出開始時刻を選択してください</p>
                 <TextField
-                  label=""
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  sx={{ width: 200 }}
-                />
+                label=""
+                type="datetime-local"
+                fullWidth
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                  width: 200
+                }}
+              />
               </Grid>
               <Grid item xs={12}>
                 <p>貸出終了時刻を選択してください</p>
                 <TextField
-                  label=""
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  sx={{ width: 200 }}
-                />
+                label=""
+                type="datetime-local"
+                fullWidth
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                  width: 200
+                }}
+              />
               </Grid>
             </Grid>
             <Box display="flex" justifyContent="center" mt={2}>
