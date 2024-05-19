@@ -30,11 +30,12 @@
 
 import axios from 'axios';
 
-const API_URL = "https://hook.us1.make.com/i3551egagx1tmo2wsreffhdolevhg7yi";
+const RENTAL_API_URL = "https://hook.us1.make.com/i3551egagx1tmo2wsreffhdolevhg7yi";
+const APPLICATION_API_URL = "https://hook.eu2.make.com/hyv2ill9ta98o5vwwqxk8jjpu78k5kzy";
 
 export const getRental = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await axios.get(RENTAL_API_URL);
     const rentals = response.data.map(item => ({
       id: item.rental_id.value,
       type: item.type.value,
@@ -50,45 +51,61 @@ export const getRental = async () => {
   }
 };
 
-
-  // src/data/api.js
-
 export const getApplication = async () => {
-  // ダミーデータの代わりに実際のAPIからデータを取得するコードをここに追加します。
-  const applications = [
-    {
-      rental_id: 1,
-      applicant_id: 1,
-      start_date: '2024-05-18',
-      status: '応募中',
-    },
-    {
-      rental_id: 2,
-      applicant_id: 1,
-      start_date: '2024-05-19',
-      status: '貸出待ち',
-    },
-    {
-      rental_id: 3,
-      applicant_id: 1,
-      start_date: '2024-05-20',
-      status: '貸出中',
-    },
-    {
-      rental_id: 4,
-      applicant_id: 1,
-      start_date: '2024-05-21',
-      status: '応募失敗',
-    },
-    {
-      rental_id: 5,
-      applicant_id: 1,
-      start_date: '2024-05-22',
-      status: '貸出終了',
-    },
-  ];
-
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(applications), 1000);
-  });
+  try {
+    const response = await axios.get(APPLICATION_API_URL);
+    const applications = response.data.map(item => ({
+      rental_id: item.rental_id.value,
+      applicant_id: item.applicant_id.value,
+      start_date: item.start_date.value,
+      status: item.status.value,
+    }));
+    return applications;
+  } catch (error) {
+    console.error("Failed to fetch applications", error);
+    throw error;
+  }
 };
+
+
+//   // src/data/api.js
+
+// export const getApplication = async () => {
+//   // ダミーデータの代わりに実際のAPIからデータを取得するコードをここに追加します。
+//   const applications = [
+//     {
+//       rental_id: 1,
+//       applicant_id: 1,
+//       start_date: '2024-05-18',
+//       status: '応募中',
+//     },
+//     {
+//       rental_id: 2,
+//       applicant_id: 1,
+//       start_date: '2024-05-19',
+//       status: '貸出待ち',
+//     },
+//     {
+//       rental_id: 3,
+//       applicant_id: 1,
+//       start_date: '2024-05-20',
+//       status: '貸出中',
+//     },
+//     {
+//       rental_id: 4,
+//       applicant_id: 1,
+//       start_date: '2024-05-21',
+//       status: '応募失敗',
+//     },
+//     {
+//       rental_id: 5,
+//       applicant_id: 1,
+//       start_date: '2024-05-22',
+//       status: '貸出終了',
+//     },
+//   ];
+
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(applications), 1000);
+//   });
+// };
