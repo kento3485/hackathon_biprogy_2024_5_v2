@@ -31,14 +31,20 @@ const CreateRecruitment = () => {
 
   return (
     <div>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            募集作成
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <Container>
-        <Header />
         <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
           <Typography
             variant="h7"
             sx={{ fontFamily: "Roboto", fontWeight: 700, color: "brack" }}
           >
-            募集作成
+            以下の項目を入力してください
           </Typography>
           <Box component="form" noValidate autoComplete="off">
             <Grid container spacing={2}>
@@ -93,20 +99,22 @@ const CreateRecruitment = () => {
                 </Select>
               </Grid>
               <Grid item xs={12}>
-                <p>貸出期間を選択してください</p>
-                <InputLabel>time span</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  // value={age}
-                  label="種別"
-                  // onChange={handleChange}
+                <p>貸出開始時刻を選択してください</p>
+                <TextField
+                  label=""
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
                   sx={{ width: 200 }}
-                >
-                  <MenuItem value={"3"}>3時間</MenuItem>
-                  <MenuItem value={"6"}>6時間</MenuItem>
-                  <MenuItem value={"1"}>1日</MenuItem>
-                </Select>
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <p>貸出終了時刻を選択してください</p>
+                <TextField
+                  label=""
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  sx={{ width: 200 }}
+                />
               </Grid>
             </Grid>
             <Box display="flex" justifyContent="center" mt={2}>
