@@ -1,6 +1,5 @@
-// src/components/RecruitmentList.js
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Grid, Card, CardContent, CardActions, Button, Box, AppBar, Toolbar } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, CardActions, Button, Box, AppBar, Toolbar, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -11,15 +10,32 @@ import { getRental } from '../data/api';
 const RecruitmentList = () => {
   const navigate = useNavigate();
   const [rentals, setRentals] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRentals = async () => {
-      const rentalData = await getRental();
-      setRentals(rentalData);
+      try {
+        const rentalData = await getRental();
+        setRentals(rentalData);
+      } catch (error) {
+        console.error("Failed to fetch rentals", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchRentals();
   }, []);
+
+  if (loading) {
+    return (
+      <Container>
+        <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+          <CircularProgress />
+        </Box>
+      </Container>
+    );
+  }
 
   return (
     <>
