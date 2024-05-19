@@ -27,3 +27,45 @@ export const getRental = async () => {
     });
   };
   
+
+  // src/data/api.js
+
+export const getApplication = async () => {
+  // ダミーデータの代わりに実際のAPIからデータを取得するコードをここに追加します。
+  const applications = [
+    {
+      rental_id: 1,
+      applicant_id: 1,
+      start_date: '2024-05-18',
+      status: '応募中',
+    },
+    {
+      rental_id: 2,
+      applicant_id: 1,
+      start_date: '2024-05-19',
+      status: '貸出待ち',
+    },
+    {
+      rental_id: 3,
+      applicant_id: 1,
+      start_date: '2024-05-20',
+      status: '貸出中',
+    },
+    {
+      rental_id: 4,
+      applicant_id: 1,
+      start_date: '2024-05-21',
+      status: '応募失敗',
+    },
+    {
+      rental_id: 5,
+      applicant_id: 1,
+      start_date: '2024-05-22',
+      status: '貸出終了',
+    },
+  ];
+
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(applications), 1000);
+  });
+};
