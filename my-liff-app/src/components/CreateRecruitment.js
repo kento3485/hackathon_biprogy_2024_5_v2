@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Container, Typography, TextField, Button, Box, Paper, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 const CreateRecruitment = () => {
   const [type, setType] = useState('');
@@ -17,6 +18,7 @@ const CreateRecruitment = () => {
 
   return (
     <Container>
+      <Header />
       <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
         <Typography variant="h2" gutterBottom>募集作成</Typography>
         <Box component="form" noValidate autoComplete="off">
