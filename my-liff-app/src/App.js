@@ -7,6 +7,8 @@ import UserProfile from "./components/UserProfile";
 import RentalDetails from "./components/RentalDetails";
 import SearchSettings from "./components/SearchSettings";
 import Review from "./components/Review";
+import RecruitmentList from "./components/RecruitmentList";
+import ApplicationComplete from "./components/ApplicationComplete";
 import Home from "./components/Home";
 
 const App = () => {
@@ -20,6 +22,8 @@ const App = () => {
         <Route path="/rental-details/:id" element={<RentalDetails />} />
         <Route path="/search-settings" element={<SearchSettings />} />
         <Route path="/review" element={<Review />} />
+        <Route path="/recruitment-list" element={<RecruitmentList />} />
+        <Route path="/application-complete/:id" element={<ApplicationComplete />} />
       </Routes>
     </Router>
   );

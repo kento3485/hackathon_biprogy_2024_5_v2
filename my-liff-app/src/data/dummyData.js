@@ -24,15 +24,40 @@ export const users = [
     // 他のレンタルデータ...
   ];
   
-  export const applications = [
+export const applications = [
     {
       rental_id: 1,
       applicant_id: 1,
       start_date: "2024-05-18",
-      status: "貸出中",
+      status: "応募中", // ステータスを追加
+    },
+    {
+      rental_id: 2,
+      applicant_id: 1,
+      start_date: "2024-05-18",
+      status: "貸出待ち", // ステータスを追加
+    },
+    {
+      rental_id: 3,
+      applicant_id: 1,
+      start_date: "2024-05-18",
+      status: "貸出中", // ステータスを追加
+    },
+    {
+      rental_id: 4,
+      applicant_id: 1,
+      start_date: "2024-05-18",
+      status: "応募失敗", // ステータスを追加
+    },
+    {
+      rental_id: 5,
+      applicant_id: 1,
+      start_date: "2024-05-18",
+      status: "貸出終了", // ステータスを追加
     },
     // 他の応募データ...
   ];
+  
   
   export const evaluations = [
     {

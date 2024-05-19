@@ -27,6 +27,9 @@ const Home = () => {
           <ListItem button component={Link} to="/review">
             <ListItemText primary="評価" />
           </ListItem>
+          <ListItem button component={Link} to="/recruitment-list">
+            <ListItemText primary="募集一覧" />
+          </ListItem>
         </List>
       </nav>
     </Container>
