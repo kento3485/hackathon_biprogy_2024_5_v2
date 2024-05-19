@@ -134,3 +134,32 @@ export const createRecruitment = async (data) => {
     throw error;
   }
 };
+
+
+export const applyForRental = async (rentalId) => {
+  const data = {
+    rental_id: rentalId,
+    applicant_id: 1, // 定数1を応募者の値として使用
+  };
+
+  try {
+    const response = await fetch('https://hook.eu2.make.com/2ewhswfirvjkly97yh14e653e3p6vvi0', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const result = await response.json();
+    console.log('Application successfully sent to the server', result);
+    return result;
+  } catch (error) {
+    console.error('Failed to send application to the server', error);
+    throw error;
+  }
+};
